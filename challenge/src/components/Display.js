@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Dashboard from './Dashboard'
 
 export default class Display extends Component {
 constructor(props) {
@@ -9,6 +10,7 @@ constructor(props) {
     balls: 0,
     type: ''
   }
+  this.hit = this.hit.bind(this)
 }
 
     foulBall = e => {
@@ -66,24 +68,28 @@ constructor(props) {
         })
     }
 
-    //
+    
     
     functionBoss(event){
         event.preventDefault();
+        console.log(this.hit)
         let funArr = [this.hit, this.ball, this.foulBall, this.strike]
-        let randomFunc = funArr[Math.random() * funArr.length>>0]
-        console.log(this.state)
+        console.log(funArr)
+        let randomFunc = funArr[Math.floor(Math.random() * funArr.length)]
+        console.log(randomFunc)
         return randomFunc(event)
       }
     
   render() {
+      
     return (
       <div>
         <h1>Count App</h1>
         <p><strong>{this.state.type}</strong></p>
         <p><strong>Strikes: </strong>{this.state.strikes}</p>
         <p><strong>Balls: </strong>{this.state.balls}</p>
-        <button onClick={(event) => this.functionBoss(event)}>Throw a Pitch</button>
+        {/* <button onClick={(event) => this.functionBoss(event)}>Throw a Pitch</button> */}
+        <Dashboard functionBoss={this.functionBoss} hit={this.hit} ball={this.ball} foulBall={this.foulBall} strike={this.strike} /> 
       </div>
     )
   }
